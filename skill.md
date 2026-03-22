@@ -1,5 +1,5 @@
 ---
-name: bloxus
+name: bloxus-open-source
 description: "Fetch Roblox documentation — Engine API (classes, services, enums, types), Luau language, Studio features, tutorials, guides, cloud/Open Cloud APIs, UI, physics, networking, monetization, and more. Use when working on .luau/.lua files, Roblox Studio projects, or any task involving Roblox development. Triggers on mentions of Roblox classes, services, enums, Luau code, or Roblox concepts (e.g., RemoteEvents, DataStores, TweenService, Marketplace, moderation, localization)."
 ---
 
