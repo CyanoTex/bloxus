@@ -38,6 +38,7 @@ They pull from:
 ### Codex
 
 1. Copy the [`bloxus-open-source/`](./bloxus-open-source) folder to `~/.codex/skills/bloxus-open-source`
+   This keeps the skill branded as Bloxus while using a conflict-free Codex id alongside an existing `$bloxus` skill.
 2. Optional but recommended: configure the Context7 MCP server for up-to-date docs lookups
 3. Use `node scripts/api-dump.js fetch` inside the installed skill the first time you want a local API dump cache
 
