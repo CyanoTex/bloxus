@@ -1,7 +1,7 @@
 interface:
   display_name: "Bloxus"
   short_description: "Research Roblox APIs and docs"
-  default_prompt: "Use $bloxus-open-source to answer a Roblox development question with the official Roblox CDN API dump for exact API data and Context7 when docs are needed."
+  default_prompt: "Use $bloxus to answer a Roblox development question with the official Roblox CDN API dump for exact API data and Context7 when docs are needed."
 
 dependencies:
   tools:

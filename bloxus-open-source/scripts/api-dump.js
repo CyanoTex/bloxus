@@ -9,7 +9,7 @@ const VERSION_URL =
   "https://clientsettingscdn.roblox.com/v2/client-version/WindowsStudio64";
 const DEFAULT_MAX_AGE_DAYS = 7;
 const CODEX_HOME = process.env.CODEX_HOME || path.join(os.homedir(), ".codex");
-const CACHE_DIR = path.join(CODEX_HOME, "cache", "bloxus-open-source");
+const CACHE_DIR = path.join(CODEX_HOME, "cache", "bloxus");
 const CURRENT_DUMP_PATH = path.join(CACHE_DIR, "Full-API-Dump.json");
 const PREVIOUS_DUMP_PATH = path.join(CACHE_DIR, "Full-API-Dump-prev.json");
 

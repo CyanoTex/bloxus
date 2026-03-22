@@ -24,14 +24,14 @@ Bloxus is a Claude Code skill that automatically activates when you work on Robl
 
 ### Claude Code
 
-1. Copy `skill.md` to `~/.claude/skills/bloxus-open-source/skill.md`
+1. Copy `skill.md` to `~/.claude/skills/bloxus/skill.md`
 2. Copy `bloxus-helpers.js` to `~/.claude/bloxus-cache/bloxus-helpers.js`
 3. Done — Bloxus activates automatically when Claude Code detects Roblox-related work
 
 ### Codex
 
-1. Copy the [`bloxus-open-source/`](./bloxus-open-source) folder to `~/.codex/skills/bloxus-open-source`
-2. Run `node bloxus-open-source/scripts/api-dump.js fetch` to cache the API dump on first use
+1. Copy the [`bloxus/`](./bloxus) folder to `~/.codex/skills/bloxus`
+2. Run `node bloxus/scripts/api-dump.js fetch` to cache the API dump on first use
 3. Optional: configure the [Context7 MCP server](https://github.com/upstash/context7) for up-to-date docs lookups
 
 ## Requirements

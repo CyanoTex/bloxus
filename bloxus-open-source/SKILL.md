@@ -1,5 +1,5 @@
 ---
-name: bloxus-open-source
+name: bloxus
 description: Research Roblox and Luau development with primary-source verification. Use when working on Roblox Studio or Rojo projects, editing `.luau` or `.lua` files, or answering questions about Roblox classes, services, enums, Creator Docs, Luau semantics, package docs, DevForum discussions, or Roblox platform status. Prefer the bundled Node.js script that fetches the official Roblox CDN API dump for exact API structure, Context7 MCP when available for up-to-date docs and package references, and current web or GitHub sources for DevForum, status, and release-note lookups.
 ---
 
