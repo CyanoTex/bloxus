@@ -2,18 +2,11 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Roblox Knowledge Engine for [Claude Code](https://claude.com/claude-code) and Codex. Queries 11 data sources, commands live Studio tools when available, and combines official docs, package docs, status checks, and API dump analysis to answer Roblox development questions with verifiable sources.
+Roblox Knowledge Engine for [Claude Code](https://claude.com/claude-code). Queries 11 data sources, commands 18 Studio tools, runs 10 local analysis scripts, and combines results across 23 patterns to answer any Roblox development question.
 
 ## What It Does
 
-Bloxus ships in agent-specific variants:
-
-- `skill.md` + `bloxus-helpers.js`: the Claude Code version
-- [`bloxus-open-source/`](./bloxus-open-source): the Codex skill package with `SKILL.md`, `agents/openai.yaml`, references, and a bundled Node CLI
-
-Both variants use the same open-source research model and fetch API dumps from Roblox's public CDN instead of Roblox-Client-Tracker.
-
-They pull from:
+Bloxus is a Claude Code skill that automatically activates when you work on Roblox projects. It pulls from:
 
 | Source | What it covers |
 |--------|---------------|
@@ -29,24 +22,15 @@ They pull from:
 
 ## Installation
 
-### Claude Code
-
 1. Copy `skill.md` to `~/.claude/skills/bloxus-open-source/skill.md`
 2. Copy `bloxus-helpers.js` to `~/.claude/bloxus-cache/bloxus-helpers.js`
 3. Done — Bloxus activates automatically when Claude Code detects Roblox-related work
-
-### Codex
-
-1. Copy the [`bloxus-open-source/`](./bloxus-open-source) folder to `~/.codex/skills/bloxus-open-source`
-   This keeps the skill branded as Bloxus while using a conflict-free Codex id if another `$bloxus` skill is present.
-2. Optional but recommended: configure the Context7 MCP server for up-to-date docs lookups
-3. Use `node scripts/api-dump.js fetch` inside the installed skill the first time you want a local API dump cache
 
 ## Requirements
 
 ### Required
 
-- [Claude Code](https://claude.com/claude-code) or Codex
+- [Claude Code](https://claude.com/claude-code)
 - [Context7 MCP server](https://github.com/upstash/context7) — powers 6 of the 11 data sources (Engine API, Creator Docs, community packages, Luau language, style guide)
 - Node.js — runs the local API dump analysis scripts
 
@@ -57,7 +41,6 @@ They pull from:
 ## Notes
 
 - The API dump is fetched directly from Roblox's CDN (`setup.rbxcdn.com`) and cached locally with a 7-day TTL
-- Claude Code caches under `~/.claude/bloxus-cache`; the Codex version caches under `~/.codex/cache/bloxus-open-source`
-- The cached dump is stored in the user's home directory, not committed to the repo
+- The cached dump (`Full-API-Dump.json`) is gitignored — it downloads automatically on first use
 
 — Claude Opus
