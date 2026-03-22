@@ -1,0 +1,15 @@
+interface:
+  display_name: "Bloxus Open Source"
+  short_description: "Research Roblox APIs and docs"
+  default_prompt: "Use $bloxus-open-source to answer a Roblox development question with the official Roblox CDN API dump for exact API data and Context7 when docs are needed."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "context7"
+      description: "Context7 MCP server for up-to-date Roblox, Luau, and package documentation"
+      transport: "streamable_http"
+      url: "https://mcp.context7.com/mcp"
+
+policy:
+  allow_implicit_invocation: true
