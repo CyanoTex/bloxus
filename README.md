@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Roblox Knowledge Engine for [Claude Code](https://claude.com/claude-code) and [Codex](https://openai.com/index/introducing-codex/). Queries 11 data sources, commands 18 Studio tools, runs 10 local analysis scripts, and combines results across 23 patterns to answer any Roblox development question.
+Roblox Knowledge Engine for [Claude Code](https://claude.com/claude-code), [Codex](https://openai.com/index/introducing-codex/), and [OpenCode](https://opencode.ai). Queries 11 data sources, commands 18 Studio tools, runs 10 local analysis scripts, and combines results across 23 patterns to answer any Roblox development question.
 
 ## What It Does
 
@@ -34,11 +34,17 @@ Bloxus is a Claude Code skill that automatically activates when you work on Robl
 2. Run `node bloxus/scripts/api-dump.js fetch` to cache the API dump on first use
 3. Optional: configure the [Context7 MCP server](https://github.com/upstash/context7) for up-to-date docs lookups
 
+### OpenCode
+
+1. Copy the [`opencode/`](./opencode) folder into your Roblox project
+2. Copy `opencode/opencode.json` to your project root (or merge the `context7` entry into your existing `opencode.json`)
+3. Run `node opencode/scripts/api-dump.js fetch` to cache the API dump on first use
+
 ## Requirements
 
 ### Required
 
-- [Claude Code](https://claude.com/claude-code) or [Codex](https://openai.com/index/introducing-codex/)
+- [Claude Code](https://claude.com/claude-code), [Codex](https://openai.com/index/introducing-codex/), or [OpenCode](https://opencode.ai)
 - [Context7 MCP server](https://github.com/upstash/context7) — powers 6 of the 11 data sources (Engine API, Creator Docs, community packages, Luau language, style guide)
 - Node.js 18+ — runs the local API dump analysis scripts
 
