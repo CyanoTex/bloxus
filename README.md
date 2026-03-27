@@ -30,8 +30,8 @@ Bloxus is a Claude Code skill that automatically activates when you work on Robl
 
 ### Codex
 
-1. Copy the [`bloxus/`](./bloxus) folder to `~/.codex/skills/bloxus`
-2. Run `node bloxus/scripts/api-dump.js fetch` to cache the API dump on first use
+1. Copy the [`codex/`](./codex) folder to `~/.codex/skills/bloxus`
+2. Run `node codex/scripts/api-dump.js fetch` to cache the API dump on first use
 3. Optional: configure the [Context7 MCP server](https://github.com/upstash/context7) for up-to-date docs lookups
 
 ### OpenCode
