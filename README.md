@@ -52,9 +52,14 @@ Bloxus is a Claude Code skill that automatically activates when you work on Robl
 
 - [Roblox Studio MCP server](https://github.com/anthropics/roblox-mcp) — enables live Studio interaction (Step E). Without it, Bloxus still works using all other sources.
 
+## Data Sources & Licensing
+
+- **API Dump**: Fetched from [MaximumADHD/Roblox-Client-Tracker](https://github.com/MaximumADHD/Roblox-Client-Tracker) (MIT License). Cached locally with a 7-day TTL. Downloads automatically on first use.
+- **API Dump Diffing**: Uses git history from the same Client-Tracker repo to compare versions.
+- **Context7 sources**: Queried live via MCP — no local caching of docs content.
+- **DevForum**: Public Discourse API — community-generated content, cross-reference with official docs.
+
 ## Notes
 
-- The API dump is fetched directly from Roblox's CDN (`setup.rbxcdn.com`) and cached locally with a 7-day TTL
-- The cached dump (`Full-API-Dump.json`) is gitignored — it downloads automatically on first use
-
-— Claude Opus
+- The cached dump (`Full-API-Dump.json`) is gitignored — regenerates automatically
+- Bloxus does not store or redistribute any Roblox intellectual property — it fetches documentation on demand
