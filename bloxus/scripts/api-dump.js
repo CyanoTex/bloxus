@@ -5,8 +5,8 @@ const fsp = require("node:fs/promises");
 const os = require("node:os");
 const path = require("node:path");
 
-const VERSION_URL =
-  "https://clientsettingscdn.roblox.com/v2/client-version/WindowsStudio64";
+const DUMP_URL =
+  "https://raw.githubusercontent.com/MaximumADHD/Roblox-Client-Tracker/roblox/Full-API-Dump.json";
 const DEFAULT_MAX_AGE_DAYS = 7;
 const CODEX_HOME = process.env.CODEX_HOME || path.join(os.homedir(), ".codex");
 const CACHE_DIR = path.join(CODEX_HOME, "cache", "bloxus");
@@ -408,22 +408,6 @@ function diffDumps(oldData, newData) {
   }
 }
 
-async function getCurrentVersion() {
-  const response = await fetch(VERSION_URL);
-  if (!response.ok) {
-    fail(`Failed to resolve current Roblox Studio version: ${response.status} ${response.statusText}`);
-  }
-
-  const payload = await response.json();
-  const version = payload.clientVersionUpload;
-
-  if (!version || typeof version !== "string") {
-    fail("Roblox version lookup did not return clientVersionUpload.");
-  }
-
-  return version;
-}
-
 async function fetchDump(options) {
   const force = Boolean(options.force);
   const maxAgeDays = Number(options["max-age-days"] || DEFAULT_MAX_AGE_DAYS);
@@ -448,9 +432,8 @@ async function fetchDump(options) {
     await fsp.copyFile(CURRENT_DUMP_PATH, PREVIOUS_DUMP_PATH);
   }
 
-  const version = await getCurrentVersion();
-  const dumpUrl = `https://setup.rbxcdn.com/${version}-Full-API-Dump.json`;
-  const response = await fetch(dumpUrl);
+  // Fetch from Roblox-Client-Tracker (MIT License)
+  const response = await fetch(DUMP_URL);
   if (!response.ok) {
     fail(`Failed to download API dump: ${response.status} ${response.statusText}`);
   }

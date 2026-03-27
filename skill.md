@@ -123,9 +123,8 @@ mkdir -p ~/.claude/bloxus-cache
 if [ -f ~/.claude/bloxus-cache/Full-API-Dump.json ]; then
   cp ~/.claude/bloxus-cache/Full-API-Dump.json ~/.claude/bloxus-cache/Full-API-Dump-prev.json
 fi
-# Fetch current version GUID from Roblox CDN, then download the API dump
-VERSION=$(curl -s "https://clientsettingscdn.roblox.com/v2/client-version/WindowsStudio64" | node -e "let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>console.log(JSON.parse(d).clientVersionUpload))")
-curl -sL "https://setup.rbxcdn.com/${VERSION}-Full-API-Dump.json" \
+# Fetch from Roblox-Client-Tracker (MIT License)
+curl -sL "https://raw.githubusercontent.com/MaximumADHD/Roblox-Client-Tracker/roblox/Full-API-Dump.json" \
   -o ~/.claude/bloxus-cache/Full-API-Dump.json
 ```
 

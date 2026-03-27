@@ -74,7 +74,7 @@ node scripts/api-dump.js members FireServer
 node scripts/api-dump.js diff old-dump.json
 ```
 
-The script stores cached Roblox API dumps under `~/.cache/bloxus/` (or `$XDG_CACHE_HOME/bloxus/`) and fetches the current dump from Roblox's public CDN using the current Studio build GUID. It does not rely on Roblox-Client-Tracker.
+The script stores cached Roblox API dumps under `~/.cache/bloxus/` (or `$XDG_CACHE_HOME/bloxus/`) and fetches from [MaximumADHD/Roblox-Client-Tracker](https://github.com/MaximumADHD/Roblox-Client-Tracker) (MIT License).
 
 ## Current-Info Workflows
 

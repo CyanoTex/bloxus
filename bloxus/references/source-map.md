@@ -23,8 +23,7 @@ Use this file when the skill needs a URL, repo, or API endpoint for Roblox resea
 
 ## API Dump Workflow
 
-- Version lookup endpoint: `https://clientsettingscdn.roblox.com/v2/client-version/WindowsStudio64`
-- Dump download pattern: `https://setup.rbxcdn.com/<VERSION>-Full-API-Dump.json`
+- Dump source: `https://raw.githubusercontent.com/MaximumADHD/Roblox-Client-Tracker/roblox/Full-API-Dump.json` (MIT License)
 - Use `node scripts/api-dump.js fetch` to cache or refresh the latest dump.
 - Use `node scripts/api-dump.js class <ClassName>` for a class lookup.
 - Use `node scripts/api-dump.js enum <EnumName>` for an enum lookup.
