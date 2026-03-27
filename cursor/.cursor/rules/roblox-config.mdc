@@ -1,0 +1,12 @@
+---
+description: Roblox project config guidance (Rojo/Wally/Aftman/Stylua/Selene)
+globs: **/{default.project.json,wally.toml,aftman.toml,selene.toml,stylua.toml}
+alwaysApply: false
+---
+
+# Roblox config files
+
+- Treat these files as authoritative signals for tools/packages used by the project.
+- If answering “how does this repo work?”, read these first before recommending changes.
+- When recommending a library pattern, first confirm whether it’s already in `wally.toml` and how it’s required/used.
+
