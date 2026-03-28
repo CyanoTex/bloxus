@@ -1,0 +1,22 @@
+---
+description: Bloxus routing + non-guessing rules (Roblox/Luau)
+alwaysApply: true
+---
+
+# Bloxus (Cursor rules)
+
+When working on Roblox/Luau questions or code:
+
+- Prefer **verifiable sources** over guessing.
+- For **exact API shape/enums/tags/security/defaults**, use the local dump script:
+  - `node cursor/scripts/api-dump.js fetch`
+  - `node cursor/scripts/api-dump.js class <Name> [--inherited]`
+  - `node cursor/scripts/api-dump.js enum <Name>`
+  - `node cursor/scripts/api-dump.js members <MemberName>`
+  - `node cursor/scripts/api-dump.js search <Query>`
+- For **documentation & examples**, use **Context7 MCP** when available; otherwise official Roblox docs.
+- For **platform health / incidents**, check Roblox Status before blaming user code.
+- If citing community sources (e.g. DevForum), label them clearly as community-sourced and cross-check with official docs when possible.
+
+Project skill: `cursor/.cursor/skills/bloxus/SKILL.md`
+

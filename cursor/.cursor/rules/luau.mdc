@@ -1,0 +1,12 @@
+---
+description: Luau/Roblox scripting conventions (when editing .lua/.luau)
+globs: **/*.{lua,luau}
+alwaysApply: false
+---
+
+# Luau conventions
+
+- Keep changes consistent with the repo’s existing architecture and naming.
+- Don’t guess Roblox APIs: confirm with `node cursor/scripts/api-dump.js ...` when exact signatures or members matter.
+- Separate confirmed facts (dump/docs) from inference when answering questions.
+
