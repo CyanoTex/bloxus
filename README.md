@@ -65,6 +65,10 @@ Bloxus is an AI coding-assistant skill that automatically activates when you wor
 - **Context7 sources**: Queried live via MCP — no local caching of docs content.
 - **DevForum**: Public Discourse API — community-generated content, cross-reference with official docs.
 
+## Contributing
+
+Want to add Bloxus support for another AI tool? See [CONTRIBUTING.md](./CONTRIBUTING.md) for the edition structure, parity requirements, and submission process.
+
 ## Notes
 
 - The cached dump (`Full-API-Dump.json`) is gitignored — regenerates automatically
