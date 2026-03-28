@@ -1,0 +1,15 @@
+# Bloxus CODEOWNERS — all changes require owner approval
+
+# Root skill (canonical) and Claude Code helper
+/skill.md               @CyanoTex
+/bloxus-helpers.js      @CyanoTex
+
+# Existing editions
+/codex/                 @CyanoTex
+/opencode/              @CyanoTex
+/cursor/                @CyanoTex
+
+# Repo-level files
+/README.md              @CyanoTex
+/LICENSE                @CyanoTex
+/.gitignore             @CyanoTex
