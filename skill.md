@@ -13,7 +13,7 @@ Multi-source intelligence system for Roblox development. Queries 11 data sources
 
 | Step | Source | What it covers | When to use |
 |------|--------|---------------|-------------|
-| **A** | **API Dump** (Roblox CDN) | Every class, property, method, event, enum — structured with types, defaults, tags, security | Need exact API signatures, property types, default values, enum values |
+| **A** | **API Dump** (Roblox-Client-Tracker JSON) | Every class, property, method, event, enum — structured with types, defaults, tags, security | Need exact API signatures, property types, default values, enum values |
 | **B** | **Context7: Engine API** (`/websites/create_roblox_reference_engine`) | Engine API reference with prose descriptions and code examples | Need code examples or detailed explanations for specific classes/enums |
 | **C** | **Context7: Creator Docs** (`/websites/create_roblox`) | Full creator documentation — tutorials, guides, Studio, Luau, cloud APIs, UI, physics, networking, monetization, publishing, moderation | Need conceptual guides, tutorials, best practices, or anything beyond engine API reference |
 | **D** | **Context7: Open Source Docs** (`/roblox/creator-docs`) | Same creator docs from the open-source repo — markdown source | Fallback if the above doesn't return good results, or for raw markdown |
@@ -22,7 +22,7 @@ Multi-source intelligence system for Roblox development. Queries 11 data sources
 | **G** | **DevForum Search** (Discourse API) | Community solutions, bug reports, staff announcements, real-world patterns | Error troubleshooting, recent API changes, community modules, workarounds |
 | **H** | **Context7: Luau Style Guide** (`/websites/roblox_github_io_lua-style-guide`) | Official Roblox Lua/Luau coding conventions and style rules | Questions about naming, formatting, code style, or best practices |
 | **I** | **Context7: Luau Language** (`/websites/luau` + `/luau-lang/luau`) | Full Luau language spec — type system, generics, metatables, grammar, RFCs, internals | Deep Luau language questions beyond what creator docs cover |
-| **J** | **API Dump Diffing** (local version history) | What changed between Roblox updates — added/removed/modified classes, members, enums | "What changed recently?", "When was X added?", breaking change investigation |
+| **J** | **API Dump Diffing** (Roblox-Client-Tracker git history) | What changed between Roblox updates — added/removed/modified classes, members, enums | "What changed recently?", "When was X added?", breaking change investigation |
 | **K** | **Roblox Status Page** (`status.roblox.com`) | Live service health — outages, degraded performance, incident history | Debugging connectivity/service failures before blaming your own code |
 
 ## When to Use
@@ -119,11 +119,6 @@ If `MISSING` or `STALE`, download it:
 
 ```bash
 mkdir -p ~/.claude/bloxus-cache
-# Save previous dump for diffing (Step J) before overwriting
-if [ -f ~/.claude/bloxus-cache/Full-API-Dump.json ]; then
-  cp ~/.claude/bloxus-cache/Full-API-Dump.json ~/.claude/bloxus-cache/Full-API-Dump-prev.json
-fi
-# Fetch from Roblox-Client-Tracker (MIT License)
 curl -sL "https://raw.githubusercontent.com/MaximumADHD/Roblox-Client-Tracker/roblox/Full-API-Dump.json" \
   -o ~/.claude/bloxus-cache/Full-API-Dump.json
 ```
@@ -772,21 +767,45 @@ tokens: 5000
 
 ### Step J: API Dump Version Diffing — What changed between updates
 
-Use this to compare the current API dump against the previous version to identify what Roblox added, removed, or modified. The previous dump is saved automatically each time Step A refreshes the cache.
+Use this to compare the current API dump against a previous version to identify what Roblox added, removed, or modified. The Roblox-Client-Tracker repo has git history of every API change.
 
-**If this fails:** Fall back to DevForum (Step G) `#updates:announcements` for release notes.
+**If this fails:** Fall back to DevForum (Step G) `#updates:announcements` for release notes, or check `https://github.com/MaximumADHD/Roblox-Client-Tracker/commits/roblox/Full-API-Dump.json` in a browser.
 
-**Prerequisite:** Step A must have been run at least twice (so that `Full-API-Dump-prev.json` exists). If the previous dump doesn't exist, tell the user that diffing requires at least one prior cache refresh.
+**Step 1: List recent commits to pick a version:**
 
-**Run the diff:**
+```bash
+curl -s "https://api.github.com/repos/MaximumADHD/Roblox-Client-Tracker/commits?path=Full-API-Dump.json&per_page=5" \
+  | node -e "
+const chunks = [];
+process.stdin.on('data', d => chunks.push(d));
+process.stdin.on('end', () => {
+  const commits = JSON.parse(Buffer.concat(chunks).toString());
+  commits.forEach((c, i) => {
+    console.log(i + ': ' + c.sha + ' | ' + c.commit.message.split('\n')[0] + ' | ' + c.commit.committer.date);
+  });
+});
+"
+```
+
+This lists the 5 most recent commits that changed the API dump. The user picks one (or default to index 1 = one version back).
+
+**Step 2: Download the old version by commit SHA:**
+
+```bash
+curl -sL "https://raw.githubusercontent.com/MaximumADHD/Roblox-Client-Tracker/COMMIT_SHA/Full-API-Dump.json" \
+  -o ~/.claude/bloxus-cache/Full-API-Dump-old.json
+```
+
+Replace `COMMIT_SHA` with the full SHA from Step 1.
+
+**Step 3: Diff the old version against the current cache:**
+
+The current cached dump at `Full-API-Dump.json` is the NEW version. The downloaded `Full-API-Dump-old.json` is the OLD version.
 
 ```bash
 node -e "
 const { loadDump } = require((process.env.HOME || process.env.USERPROFILE) + '/.claude/bloxus-cache/bloxus-helpers.js');
-const fs = require('fs');
-const prevPath = ((process.env.HOME || process.env.USERPROFILE) + '/.claude/bloxus-cache/Full-API-Dump-prev.json');
-if (!fs.existsSync(prevPath)) { console.log('No previous dump found. Diffing requires at least one prior cache refresh.'); process.exit(0); }
-const oldData = loadDump('Full-API-Dump-prev.json');
+const oldData = loadDump('Full-API-Dump-old.json');
 const newData = loadDump();
 
 // Build maps
@@ -840,9 +859,11 @@ if (!addedClasses.length && !removedClasses.length && !addedEnums.length && !rem
 ```
 
 **Workflow summary:**
-1. Run the diff script comparing the previous vs current cached dump
-2. Look up any changed APIs via Steps A-D for context
-3. Optionally search DevForum (Step G) `#updates:announcements` for release notes
+1. List recent commits (Step 1) -- let user pick or default to one version back
+2. Download that commit's dump as `Full-API-Dump-old.json` (Step 2)
+3. Run the diff script comparing old vs current cache (Step 3)
+4. Look up any changed APIs via Steps A-D for context
+5. Optionally search DevForum (Step G) `#updates:announcements` for release notes
 
 ---
 

@@ -28,6 +28,7 @@ Use this file when the skill needs a URL, repo, or API endpoint for Roblox resea
 - Use `node scripts/api-dump.js class <ClassName>` for a class lookup.
 - Use `node scripts/api-dump.js enum <EnumName>` for an enum lookup.
 - Use `node scripts/api-dump.js members <MemberName>` to find a member across classes.
+- Use `node scripts/api-dump.js search <Query>` for quick class/enum discovery.
 - Use `node scripts/api-dump.js diff <oldDumpPath>` to compare an older dump with the current cached dump.
 
 ## Recent Change Tracking

@@ -63,3 +63,4 @@ Bloxus is a Claude Code skill that automatically activates when you work on Robl
 
 - The cached dump (`Full-API-Dump.json`) is gitignored — regenerates automatically
 - Bloxus does not store or redistribute any Roblox intellectual property — it fetches documentation on demand
+- Bloxus is updated as Roblox APIs evolve — pull the latest from this repo periodically to stay current
