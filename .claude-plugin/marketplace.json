@@ -14,7 +14,7 @@
       "name": "bloxus",
       "description": "Fetch Roblox documentation — Engine API, Luau language, Studio features, tutorials, guides, cloud APIs, community packages, and more. Activates automatically for Roblox projects.",
       "source": "./",
-      "strict": false,
+      "strict": true,
       "skills": [
         "./skills/bloxus"
       ]
