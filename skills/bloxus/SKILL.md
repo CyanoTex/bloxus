@@ -76,31 +76,31 @@ Not sure?
 
 Use this when you need structured, machine-readable API data: class members, property types, default values, enum items, tags, security levels, inheritance chains.
 
-The CLI script at `~/.claude/skills/bloxus/scripts/api-dump.js` wraps all API dump operations. It caches the dump at `~/.claude/bloxus-cache/` and auto-downloads if missing or stale (>7 days).
+The CLI script at `scripts/api-dump.js` wraps all API dump operations. It caches the dump at `~/.claude/bloxus-cache/` and auto-downloads if missing or stale (>7 days).
 
 **Subcommands:**
 
 ```bash
 # Fetch/refresh the API dump cache
-node ~/.claude/skills/bloxus/scripts/api-dump.js fetch
+node scripts/api-dump.js fetch
 
 # Extract a class or service (own members only)
-node ~/.claude/skills/bloxus/scripts/api-dump.js class Humanoid
+node scripts/api-dump.js class Humanoid
 
 # Extract a class with full inheritance chain (own + inherited members)
-node ~/.claude/skills/bloxus/scripts/api-dump.js class Humanoid --inherited
+node scripts/api-dump.js class Humanoid --inherited
 
 # Extract an enum with all items and values
-node ~/.claude/skills/bloxus/scripts/api-dump.js enum Material
+node scripts/api-dump.js enum Material
 
 # Search classes and enums by keyword
-node ~/.claude/skills/bloxus/scripts/api-dump.js search Tween
+node scripts/api-dump.js search Tween
 
 # Search members across all classes (e.g., "which classes have a Touched event?")
-node ~/.claude/skills/bloxus/scripts/api-dump.js members Touched
+node scripts/api-dump.js members Touched
 
 # Diff current dump against an older version (see Step J)
-node ~/.claude/skills/bloxus/scripts/api-dump.js diff Full-API-Dump-old.json
+node scripts/api-dump.js diff Full-API-Dump-old.json
 ```
 
 All output is formatted markdown. The `class` command includes properties, methods, events, and callbacks with their types, tags, and security context. The `members` command searches across every class and accepts an optional `--type` filter (`Property`, `Function`, `Event`, `Callback`).
@@ -278,7 +278,7 @@ curl -sL "https://raw.githubusercontent.com/MaximumADHD/Roblox-Client-Tracker/CO
 **Step 3: Diff using the CLI:**
 
 ```bash
-node ~/.claude/skills/bloxus/scripts/api-dump.js diff Full-API-Dump-old.json
+node scripts/api-dump.js diff Full-API-Dump-old.json
 ```
 
 Reports added/removed classes, enums, and member changes. Look up any changed APIs via Steps A-D for context, or search DevForum (Step G) `#updates:announcements` for release notes.

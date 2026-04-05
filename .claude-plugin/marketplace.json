@@ -1,0 +1,23 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "bloxus",
+  "owner": {
+    "name": "CyanoTex",
+    "url": "https://github.com/CyanoTex"
+  },
+  "metadata": {
+    "description": "Roblox Knowledge Engine — queries 11 data sources to answer any Roblox development question",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "bloxus",
+      "description": "Fetch Roblox documentation — Engine API, Luau language, Studio features, tutorials, guides, cloud APIs, community packages, and more. Activates automatically for Roblox projects.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/bloxus"
+      ]
+    }
+  ]
+}
