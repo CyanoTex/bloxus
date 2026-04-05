@@ -1,7 +1,9 @@
 # Bloxus CODEOWNERS — all changes require owner approval
 
-# Root skill (canonical) and Claude Code helper
-/skill.md               @CyanoTex
+# Canonical skill and plugin config
+/skills/bloxus/SKILL.md @CyanoTex
+/skills/                @CyanoTex
+/.claude-plugin/        @CyanoTex
 /bloxus-helpers.js      @CyanoTex
 
 # Existing editions

@@ -24,9 +24,8 @@ Bloxus is an AI coding-assistant skill that automatically activates when you wor
 
 ### Claude Code
 
-1. Copy `skill.md`, `scripts/`, and `references/` to `~/.claude/skills/bloxus/`
-2. Copy `bloxus-helpers.js` to `~/.claude/bloxus-cache/bloxus-helpers.js`
-3. Done — Bloxus activates automatically when Claude Code detects Roblox-related work
+1. Run `/install-plugin github:CyanoTex/bloxus` in Claude Code
+2. Done — Bloxus activates automatically and updates itself
 
 ### Codex
 

@@ -31,7 +31,7 @@ Platform-specific sections (cache paths, MCP config format, skill metadata) shou
 ### What NOT to do
 
 - Do not modify existing editions — your PR should only add files under your new folder
-- Do not modify root files (`skill.md`, `bloxus-helpers.js`, `README.md`) — those will be updated by the maintainer after your edition is merged
+- Do not modify root files (`skills/bloxus/SKILL.md`, `bloxus-helpers.js`, `README.md`) — those will be updated by the maintainer after your edition is merged
 - Do not submit stub or placeholder files — incomplete editions will be sent back for revision
 
 ### Process
