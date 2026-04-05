@@ -57,6 +57,7 @@ These IDs were carried over from the open-source Bloxus skill. Treat them as hel
 - Luau style guide: `/websites/roblox_github_io_lua-style-guide`
 - Luau docs: `/websites/luau`
 - Luau GitHub repo: `/luau-lang/luau`
+- Luau site docs: `/luau-lang/site`
 
 Community package IDs:
 
