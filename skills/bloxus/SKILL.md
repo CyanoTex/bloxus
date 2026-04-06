@@ -1,6 +1,6 @@
 ---
 name: bloxus
-description: "Fetch Roblox documentation — Engine API (classes, services, enums, types), Luau language, Studio features, tutorials, guides, cloud/Open Cloud APIs, UI, physics, networking, monetization, and more. Use when working on .luau/.lua files, Roblox Studio projects, or any task involving Roblox development. Triggers on mentions of Roblox classes, services, enums, Luau code, or Roblox concepts (e.g., RemoteEvents, DataStores, TweenService, Marketplace, moderation, localization)."
+description: "Fetch Roblox documentation — Engine API (classes, services, enums, types), Luau, Creator Docs, Studio, cloud APIs. Use when working on .luau/.lua files or Roblox development (RemoteEvents, DataStores, TweenService, etc.)."
 ---
 
 # Bloxus — Roblox Knowledge Engine
@@ -76,31 +76,31 @@ Not sure?
 
 Use this when you need structured, machine-readable API data: class members, property types, default values, enum items, tags, security levels, inheritance chains.
 
-The CLI script at `scripts/api-dump.js` wraps all API dump operations. It caches the dump at `~/.claude/bloxus-cache/` and auto-downloads if missing or stale (>7 days).
+The CLI script at `${CLAUDE_SKILL_DIR}/scripts/api-dump.js` wraps all API dump operations. It caches the dump at `~/.claude/bloxus-cache/` and auto-downloads if missing or stale (>7 days).
 
 **Subcommands:**
 
 ```bash
 # Fetch/refresh the API dump cache
-node scripts/api-dump.js fetch
+node ${CLAUDE_SKILL_DIR}/scripts/api-dump.js fetch
 
 # Extract a class or service (own members only)
-node scripts/api-dump.js class Humanoid
+node ${CLAUDE_SKILL_DIR}/scripts/api-dump.js class Humanoid
 
 # Extract a class with full inheritance chain (own + inherited members)
-node scripts/api-dump.js class Humanoid --inherited
+node ${CLAUDE_SKILL_DIR}/scripts/api-dump.js class Humanoid --inherited
 
 # Extract an enum with all items and values
-node scripts/api-dump.js enum Material
+node ${CLAUDE_SKILL_DIR}/scripts/api-dump.js enum Material
 
 # Search classes and enums by keyword
-node scripts/api-dump.js search Tween
+node ${CLAUDE_SKILL_DIR}/scripts/api-dump.js search Tween
 
 # Search members across all classes (e.g., "which classes have a Touched event?")
-node scripts/api-dump.js members Touched
+node ${CLAUDE_SKILL_DIR}/scripts/api-dump.js members Touched
 
 # Diff current dump against an older version (see Step J)
-node scripts/api-dump.js diff Full-API-Dump-old.json
+node ${CLAUDE_SKILL_DIR}/scripts/api-dump.js diff Full-API-Dump-old.json
 ```
 
 All output is formatted markdown. The `class` command includes properties, methods, events, and callbacks with their types, tags, and security context. The `members` command searches across every class and accepts an optional `--type` filter (`Property`, `Function`, `Event`, `Callback`).
@@ -118,7 +118,7 @@ topic: "<describe what you need>"
 tokens: 5000
 ```
 
-See [references/context7-claude.md](references/context7-claude.md) for all library IDs, example queries, and routing advice.
+See [references/context7-claude.md](${CLAUDE_SKILL_DIR}/references/context7-claude.md) for all library IDs, example queries, and routing advice.
 
 ---
 
@@ -133,7 +133,7 @@ topic: "<describe what you need>"
 tokens: 5000
 ```
 
-See [references/context7-claude.md](references/context7-claude.md) for topic-specific example queries.
+See [references/context7-claude.md](${CLAUDE_SKILL_DIR}/references/context7-claude.md) for topic-specific example queries.
 
 ---
 
@@ -158,7 +158,7 @@ When the Roblox Studio MCP server is connected, you have full read/write/execute
 
 Only use Studio MCP tools when the user is actively working in Studio or references live game objects. Always verify the active Studio instance first with `mcp__Roblox_Studio__list_roblox_studios` if there's any ambiguity.
 
-See [references/studio-mcp.md](references/studio-mcp.md) for all 18 tools, parameters, and cross-reference patterns.
+See [references/studio-mcp.md](${CLAUDE_SKILL_DIR}/references/studio-mcp.md) for all 18 tools, parameters, and cross-reference patterns.
 
 ---
 
@@ -175,7 +175,7 @@ tokens: 5000
 
 For unlisted packages, use `mcp__plugin_context7_context7__resolve-library-id` to search by name. If Context7 doesn't index it, fall back to the package's GitHub README via WebFetch.
 
-See [references/context7-claude.md](references/context7-claude.md) for all library IDs and auto-detection mappings.
+See [references/context7-claude.md](${CLAUDE_SKILL_DIR}/references/context7-claude.md) for all library IDs and auto-detection mappings.
 
 ---
 
@@ -225,7 +225,7 @@ topic: "<describe what you need>"
 tokens: 5000
 ```
 
-See [references/context7-claude.md](references/context7-claude.md) for example queries.
+See [references/context7-claude.md](${CLAUDE_SKILL_DIR}/references/context7-claude.md) for example queries.
 
 ---
 
@@ -244,7 +244,7 @@ tokens: 5000
 
 **When to use Step I vs Step C:** Use Step C for practical Roblox-focused questions ("How do I use types in my game?"). Use Step I for language-level detail ("How do generic type packs work?", "Metatable __index resolution order").
 
-See [references/context7-claude.md](references/context7-claude.md) for fallback library IDs and routing guidance.
+See [references/context7-claude.md](${CLAUDE_SKILL_DIR}/references/context7-claude.md) for fallback library IDs and routing guidance.
 
 ---
 
@@ -278,7 +278,7 @@ curl -sL "https://raw.githubusercontent.com/MaximumADHD/Roblox-Client-Tracker/CO
 **Step 3: Diff using the CLI:**
 
 ```bash
-node scripts/api-dump.js diff Full-API-Dump-old.json
+node ${CLAUDE_SKILL_DIR}/scripts/api-dump.js diff Full-API-Dump-old.json
 ```
 
 Reports added/removed classes, enums, and member changes. Look up any changed APIs via Steps A-D for context, or search DevForum (Step G) `#updates:announcements` for release notes.
