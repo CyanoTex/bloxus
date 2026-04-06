@@ -1,0 +1,29 @@
+#!/bin/bash
+# Auto-bump plugin version on first code commit per branch.
+
+# Skip on main
+branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+if [ "$branch" = "main" ]; then
+  exit 0
+fi
+
+# Skip if already bumped vs main
+main_version=$(git show main:.claude-plugin/plugin.json 2>/dev/null | grep -oP '"version":\s*"\K[^"]+')
+current_version=$(grep -oP '"version":\s*"\K[^"]+' .claude-plugin/plugin.json)
+
+if [ "$main_version" != "$current_version" ]; then
+  exit 0
+fi
+
+# Skip if only docs/config staged
+ignored='README\.md|LICENSE|CONTRIBUTING\.md|\.github/|\.githooks/|docs/'
+version_files='\.claude-plugin/(plugin|marketplace)\.json'
+code_staged=$(git diff --cached --name-only | grep -vE "$ignored" | grep -vE "$version_files" | head -1)
+
+if [ -z "$code_staged" ]; then
+  exit 0
+fi
+
+# Bump and stage
+node "$(git rev-parse --show-toplevel)/scripts/bump-version.js"
+git add .claude-plugin/plugin.json .claude-plugin/marketplace.json

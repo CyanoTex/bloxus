@@ -64,6 +64,16 @@ Bloxus is an AI coding-assistant skill that automatically activates when you wor
 - **Context7 sources**: Queried live via MCP — no local caching of docs content.
 - **DevForum**: Public Discourse API — community-generated content, cross-reference with official docs.
 
+## Development Setup
+
+After cloning, enable the project git hooks:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+This wires up automatic version bumping — the pre-commit hook bumps the patch version in `plugin.json` and `marketplace.json` on the first code commit of each branch.
+
 ## Contributing
 
 Want to add Bloxus support for another AI tool? See [CONTRIBUTING.md](./CONTRIBUTING.md) for the edition structure, parity requirements, and submission process.

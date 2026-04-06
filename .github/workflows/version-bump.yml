@@ -1,0 +1,52 @@
+name: Version Bump Check
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check if code changed without version bump
+        run: |
+          BASE=${{ github.event.pull_request.base.sha }}
+          HEAD=${{ github.event.pull_request.head.sha }}
+
+          IGNORED="README\.md|LICENSE|CONTRIBUTING\.md|\.github/|\.githooks/|docs/"
+
+          CODE_CHANGED=$(git diff --name-only "$BASE" "$HEAD" | grep -vE "$IGNORED" | head -1)
+
+          if [ -z "$CODE_CHANGED" ]; then
+            echo "Only docs/config changed — no version bump needed."
+            exit 0
+          fi
+
+          echo "Code files changed:"
+          git diff --name-only "$BASE" "$HEAD" | grep -vE "$IGNORED"
+
+          VERSION_BUMPED=$(git diff --name-only "$BASE" "$HEAD" | grep -E "^\.claude-plugin/(plugin|marketplace)\.json$" | head -1)
+
+          if [ -z "$VERSION_BUMPED" ]; then
+            echo ""
+            echo "::error::Code changed but no version bump detected. The pre-commit hook should handle this automatically — run: git config core.hooksPath .githooks"
+            exit 1
+          fi
+
+          PLUGIN_VER=$(git show "$HEAD:.claude-plugin/plugin.json" | grep -oP '"version":\s*"\K[^"]+')
+          MARKET_VER=$(git show "$HEAD:.claude-plugin/marketplace.json" | grep -oP '"version":\s*"\K[^"]+')
+
+          echo ""
+          echo "Versions: plugin.json=$PLUGIN_VER, marketplace.json=$MARKET_VER"
+
+          if [ "$PLUGIN_VER" != "$MARKET_VER" ]; then
+            echo ""
+            echo "::error::Version mismatch! plugin.json=$PLUGIN_VER, marketplace.json=$MARKET_VER"
+            exit 1
+          fi
+
+          echo "Version bump confirmed: $PLUGIN_VER"
