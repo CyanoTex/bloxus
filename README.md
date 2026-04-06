@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Roblox Knowledge Engine for [Claude Code](https://claude.com/claude-code), [Codex](https://openai.com/index/introducing-codex/), [OpenCode](https://opencode.ai), and [Cursor](https://cursor.com). Queries 11 data sources, commands 18 Studio tools, runs 10 local analysis scripts, and combines results across 23 patterns to answer any Roblox development question.
+Roblox Knowledge Engine for [Claude Code](https://claude.com/claude-code), [Codex](https://openai.com/index/introducing-codex/), [OpenCode](https://opencode.ai), and [Cursor](https://cursor.com). Queries 11 data sources, commands 18 Studio tools, runs 6 local API dump subcommands, and combines results across 23 patterns to answer any Roblox development question.
 
 ## What It Does
 
