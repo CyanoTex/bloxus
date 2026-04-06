@@ -1,6 +1,6 @@
 ---
 name: bloxus
-description: "Fetch Roblox documentation — Engine API (classes, services, enums, types), Luau language, Creator Docs, Studio features, cloud APIs. Use when working on .luau/.lua files or any Roblox development task."
+description: "Fetch Roblox documentation — Engine API (classes, services, enums, types), Luau, Creator Docs, Studio, cloud APIs. Use when working on .luau/.lua files or Roblox development (RemoteEvents, DataStores, TweenService, etc.)."
 ---
 
 # Bloxus — Roblox Knowledge Engine
